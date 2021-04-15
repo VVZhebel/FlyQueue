@@ -4,7 +4,6 @@ Handler::Handler(){}
 Handler::~Handler(){
 }
 std::vector<byte> Handler::handle(std::vector<byte>& R){
-    std::cout << "Message size: " << R.size() << std::endl;
     LongBuf Id;
     std::vector<byte> Data;
     switch (R[0])
@@ -29,11 +28,6 @@ std::vector<byte> Handler::handle(std::vector<byte>& R){
     default:
         break;
     }
-
-    std::cout << "Code: " << (int)(R[0]) << " Id: " << Id.Id << " Data size:" << Data.size() << " "; 
-    for (auto &i:Data)
-        std::cout << (int)i << " ";
-    std::cout << std::endl;
 
     return Response;
 }
