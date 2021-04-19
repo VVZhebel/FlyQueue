@@ -49,7 +49,8 @@ public:
         if (listener < 0)
         {
             std::cerr << "Error while socket initialization" << std::endl;
-            exit(1);
+            //exit(1);
+            return;
         }
         std::cout << "Socket successfully initialized" << std::endl;
 
@@ -62,7 +63,6 @@ public:
         if (bind(this->listener, (struct sockaddr *)&addr, sizeof(struct sockaddr_in)))
         {
             std::cerr << "Error on binding stream socket" << std::endl;
-            exit(1);
             return;
         }
 
