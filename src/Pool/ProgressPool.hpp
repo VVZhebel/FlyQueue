@@ -52,4 +52,7 @@ class ProgressPool{
             Index.erase(i);
         return Old;
     }
+    int getSize(){
+        return Index.size();
+    }
 };

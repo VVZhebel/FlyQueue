@@ -9,7 +9,11 @@
 #include "../Task/TaskWithTimer.hpp"
 #include "../MaskStorage.hpp"
 
-#define SLEEP_TIME 20
+#include "../ResultLog/Logger.hpp"
+#include "../Server/Server.hpp"
+#include "../Handler/Handler.hpp"
+
+#define SLEEP_TIME 5
 
 class Watcher{
     private:
@@ -18,11 +22,20 @@ class Watcher{
         Watcher(Watcher const&) = delete;
         Watcher& operator= (Watcher const&) = delete;
 
-        std::thread T;
+        std::thread T1;
+        std::thread T2;
         bool Active;
+
+        Server<Handler>* S;
+        Logger* L;
+
+        
     public:
         static Watcher& W();
         void start();
+        void start(Logger*, Server<Handler>*);
         void stop();
-        bool is_active();
+        bool is_active();      
+
+        void stop_all_pool();
 };

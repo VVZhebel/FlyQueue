@@ -17,12 +17,18 @@ int main(){
         TaskPool<Task<MaskStorage>>::Pool().pushTask(T);
     }
 
-    Watcher::W().start();
     Logger L;
-    L.Start();
-
     Server<Handler> S(5555,128);
+
+    Watcher::W().start(&L,&S);
+
+
+    L.Start();
     S.Start();
 
+    Watcher::W().stop();
+    L.Stop();
+
+    std::cout << "All work is done" << std::endl;
     return 0;
 }

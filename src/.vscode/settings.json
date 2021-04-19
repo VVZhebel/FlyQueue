@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "optional": "cpp",
+        "random": "cpp",
+        "limits": "cpp",
+        "*.tcc": "cpp",
+        "cmath": "cpp",
+        "type_traits": "cpp",
+        "new": "cpp",
+        "utility": "cpp",
+        "array": "cpp"
+    }
+}

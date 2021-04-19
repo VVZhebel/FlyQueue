@@ -44,4 +44,7 @@ class TaskPool{
         Active = false;
         semaphore.unleash();
     }
+    int getSize(){
+        return Tasks.size();
+    }
 };
