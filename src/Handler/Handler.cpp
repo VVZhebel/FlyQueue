@@ -25,6 +25,14 @@ std::vector<byte> Handler::handle(std::vector<byte>& R){
         Data.insert(Data.end(), R.begin()+LONG_SIZE+1, R.end());
         this->pushResult(Id.Id, Data);
         break;
+    case 5:
+        LongBuf TaskSize;
+        LongBuf PoolSize;
+        TaskSize.Id = ProgressPool<TaskWithTimer<Task<MaskStorage>>>::Pool().getSize();
+        PoolSize.Id = TaskPool<Task<MaskStorage>>::Pool().getSize();
+        Response.insert(Response.end(), TaskSize.Buf, TaskSize.Buf + 8);
+        Response.insert(Response.end(), PoolSize.Buf, PoolSize.Buf + 8);
+        break;
     default:
         break;
     }
