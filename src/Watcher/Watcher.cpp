@@ -27,8 +27,8 @@ void Watcher::start(){
     T2 = std::thread([](Watcher* W){
         while (Watcher::W().is_active()){
             sleep(SLEEP_TIME);
-            //std::cout << "TaskPool: " << TaskPool<Task<MaskStorage>>::Pool().getSize() << std::endl;
-            //std::cout << "ProgressPool: " << ProgressPool<TaskWithTimer<Task<MaskStorage>>>::Pool().getSize() << std::endl;
+            std::cout << "TaskPool: " << TaskPool<Task<MaskStorage>>::Pool().getSize() << std::endl;
+            std::cout << "ProgressPool: " << ProgressPool<TaskWithTimer<Task<MaskStorage>>>::Pool().getSize() << std::endl;
             if ((TaskPool<Task<MaskStorage>>::Pool().getSize() == 0) && (ProgressPool<TaskWithTimer<Task<MaskStorage>>>::Pool().getSize() == 0)){
                 std::cout << "Stop server" << std::endl;
                 W->stop_all_pool();

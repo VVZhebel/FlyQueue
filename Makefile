@@ -1,6 +1,6 @@
 CC=g++
 SRC_DIR=src
-FLAGS=-m64 -g3 -Wall -std=c++11
+FLAGS=-m64 -O3 -Wall -std=c++11
 PROG_NAME=queue
 
 all: main
