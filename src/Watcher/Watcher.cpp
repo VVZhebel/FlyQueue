@@ -9,8 +9,12 @@ Watcher::Watcher(){
     Active = true;
 }
 Watcher::~Watcher(){
-    T1.join();
-    T2.join();
+    std::cout << "Watcher destructor" << std::endl;
+    if (T1.joinable())
+        T1.join();
+    if (T2.joinable())
+        T2.join();
+    std::cout << "Watcher destructor finished" << std::endl;
 }
 
 void Watcher::start(){
@@ -23,6 +27,7 @@ void Watcher::start(){
                 delete i;
             }
         }
+        std::cout << "End of clean task" << std::endl;
     });
     T2 = std::thread([](Watcher* W){
         while (Watcher::W().is_active()){
@@ -32,10 +37,13 @@ void Watcher::start(){
             if ((TaskPool<Task<MaskStorage>>::Pool().getSize() == 0) && (ProgressPool<TaskWithTimer<Task<MaskStorage>>>::Pool().getSize() == 0)){
                 std::cout << "Stop server" << std::endl;
                 W->stop_all_pool();
+                std::cout << "Pool stoped" << std::endl;
                 W->stop();
+                std::cout << "Watcher stoped" << std::endl;
                 return;
             }
         }
+        std::cout << "End of stop task" << std::endl;
     }, this);
 }
 
@@ -64,4 +72,11 @@ bool Watcher::is_active(){
 void Watcher::stop_all_pool(){
     this->S->Stop();
     this->L->Stop();
+}
+
+void Watcher::wait(){
+    if (T1.joinable())
+        T1.join();
+    if (T2.joinable())
+        T2.join();
 }

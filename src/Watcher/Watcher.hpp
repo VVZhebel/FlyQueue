@@ -38,4 +38,5 @@ class Watcher{
         bool is_active();      
 
         void stop_all_pool();
+        void wait();
 };

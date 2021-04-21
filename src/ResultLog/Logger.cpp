@@ -5,13 +5,16 @@ Logger::Logger()
 }
 Logger::~Logger()
 {
+    if (Worker.joinable())
+        Worker.join();
+    std::cout << "Logger is stopped" << std::endl;
 }
 void Logger::Start()
 {
     Worker = std::thread([]() {
         while (LogPool::Pool().Active)
         {
-            auto *T = LogPool::Pool().popTask();
+            auto T = LogPool::Pool().popTask();
             if (T)
             {
                 std::ofstream File(RESULT_FILE, std::ios::binary | std::ios::out | std::ios::app);
@@ -34,4 +37,5 @@ void Logger::Stop()
     LogPool::Pool().StopService();
     if (Worker.joinable())
         Worker.join();
+    std::cout << "Stop logger" << std::endl;
 }

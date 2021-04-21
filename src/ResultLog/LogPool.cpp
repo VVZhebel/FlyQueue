@@ -7,12 +7,15 @@ LogPool::LogPool() : Active(true)
 
 LogPool::~LogPool()
 {
-    while (Tasks.size() > 0)
+    std::cout << this->Tasks.size() << std::endl;
+    while (this->Tasks.size()>0)
     {
-        LogTask *T = Tasks.front();
-        Tasks.pop();
-        delete T;
+        LogTask *T = this->Tasks.front();
+        this->Tasks.pop();
+        if (T)
+            delete T;
     }
+    std::cout << "Log pool stopped" << std::endl;
 }
 
 LogPool& LogPool::Pool()
@@ -30,9 +33,13 @@ void LogPool::pushTask(LogTask *T)
 
 LogTask *LogPool::popTask()
 {
-    haveTasks.lock();
-    if (!Active)
+    if (!Active){
         return nullptr;
+    }
+    haveTasks.lock();
+    if (!Active){
+        return nullptr;
+    }
     std::unique_lock<std::mutex> Guard(vectorLock);
     LogTask *temp = Tasks.front();
     Tasks.pop();

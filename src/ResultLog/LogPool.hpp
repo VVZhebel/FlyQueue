@@ -12,7 +12,7 @@ private:
     LogPool(LogPool const &) = delete;
     LogPool &operator=(LogPool const &) = delete;
 
-    std::queue<LogTask *> Tasks;
+    std::queue<LogTask *> Tasks = {};
     std::mutex vectorLock;
     std::mutex haveTasks;
 

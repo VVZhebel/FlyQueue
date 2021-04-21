@@ -7,7 +7,7 @@
 
 int main(){
     Task<MaskStorage>::initCounter();
-
+/*
     for (unsigned char i=0; i<10; i++){
         MaskStorage M;
         M.parentId.Id = -1;
@@ -16,7 +16,7 @@ int main(){
         Task<MaskStorage>* T = new Task<MaskStorage>(M);
         TaskPool<Task<MaskStorage>>::Pool().pushTask(T);
     }
-
+*/
     Logger L;
     Server<Handler> S(5555,128);
 
@@ -27,6 +27,7 @@ int main(){
     S.Start();
 
     Watcher::W().stop();
+    Watcher::W().wait();
     L.Stop();
 
     std::cout << "All work is done" << std::endl;

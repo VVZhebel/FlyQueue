@@ -113,6 +113,7 @@ public:
                 T.detach();
             }
         }
+        std::cout << "Server thread was stopped" << std::endl;
     }
     void Stop()
     {
