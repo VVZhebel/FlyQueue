@@ -26,9 +26,11 @@ int main(){
     L.Start();
     S.Start();
 
+    L.Stop();
+    
     Watcher::W().stop();
     Watcher::W().wait();
-    L.Stop();
+    
 
     std::cout << "All work is done" << std::endl;
     return 0;

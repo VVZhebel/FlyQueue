@@ -62,7 +62,10 @@ Watcher& Watcher::W(){
 
 void Watcher::stop(){
     Active = false;
-    pthread_kill(T1.native_handle(), SIGALRM);
+    if (T1.joinable())
+        pthread_kill(T1.native_handle(), SIGALRM);
+    if (T2.joinable())
+        pthread_kill(T2.native_handle(), SIGALRM);
 }
 
 bool Watcher::is_active(){
