@@ -12,7 +12,9 @@ template <class Task>
 class ProgressPool{
   private:
     ProgressPool(){}
-    ~ProgressPool(){}
+    ~ProgressPool(){
+        std::cout << "ProgressPool destructor" << std::endl;
+    }
     ProgressPool(ProgressPool const &)=delete;
     ProgressPool& operator= (ProgressPool const &)=delete;
 

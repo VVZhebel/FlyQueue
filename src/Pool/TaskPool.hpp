@@ -9,7 +9,9 @@ template <class Task>
 class TaskPool{
   private:
     TaskPool():Active(true){}
-    ~TaskPool(){}
+    ~TaskPool(){
+        std::cout << "TaskPool destructor" << std::endl;
+    }
     TaskPool(TaskPool const &)=delete;
     TaskPool& operator= (TaskPool const &)=delete;
 

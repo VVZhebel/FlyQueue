@@ -13,7 +13,7 @@
 #include "../Server/Server.hpp"
 #include "../Handler/Handler.hpp"
 
-#define SLEEP_TIME 5
+#define SLEEP_TIME 10
 
 class Watcher{
     private:

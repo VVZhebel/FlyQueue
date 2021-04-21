@@ -84,11 +84,11 @@ public:
             {
                 std::thread T([](int client) {
                     unsigned long size;
-                    int len = recv(client, &size, sizeof(size), MSG_NOSIGNAL);
+                    int len = recv(client, &size, sizeof(size), MSG_DONTWAIT);
                     if (len > 0)
                     {
                         byte buf[size];
-                        len = recv(client, buf, size, MSG_NOSIGNAL);
+                        len = recv(client, buf, size, MSG_DONTWAIT);
                         if (len > 0)
                         {
                             std::vector<byte> Request;
@@ -101,8 +101,8 @@ public:
                             {
                                 LongBuf S;
                                 S.Id = response.size();
-                                send(client, S.Buf, 8, MSG_NOSIGNAL);
-                                send(client, response.data(), response.size(), MSG_NOSIGNAL);
+                                send(client, S.Buf, 8, MSG_DONTWAIT);
+                                send(client, response.data(), response.size(), MSG_DONTWAIT);
                             }
                         }
                     }

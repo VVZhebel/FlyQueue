@@ -22,9 +22,13 @@ void Watcher::start(){
         while (Watcher::W().is_active()){
             sleep(SLEEP_TIME);
             std::vector<TaskWithTimer<Task<MaskStorage>>*> Old = ProgressPool<TaskWithTimer<Task<MaskStorage>>>::Pool().popOld();
-            for (auto &i:Old){
-                TaskPool<Task<MaskStorage>>::Pool().pushTask(i->T);
-                delete i;
+            if (Old.size() > 0)
+            {
+                for (auto &i : Old)
+                {
+                    TaskPool<Task<MaskStorage>>::Pool().pushTask(i->T);
+                    delete i;
+                }
             }
         }
         std::cout << "End of clean task" << std::endl;
@@ -61,6 +65,7 @@ Watcher& Watcher::W(){
 
 
 void Watcher::stop(){
+    if (!Active) return;
     Active = false;
     if (T1.joinable())
         pthread_kill(T1.native_handle(), SIGALRM);

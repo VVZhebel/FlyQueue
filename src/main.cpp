@@ -31,6 +31,7 @@ int main(){
     Watcher::W().stop();
     Watcher::W().wait();
     L.Stop();
+    TaskPool<Task<MaskStorage>>::Pool().StopPool();
 
     std::cout << "All work is done" << std::endl;
     return 0;
